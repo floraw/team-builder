@@ -1,5 +1,4 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 import Form from "./components/Form";
@@ -7,7 +6,7 @@ import TeamList from "./components/TeamList";
 
 function App() {
 
-  const [members, setMember] = useState([
+  const [members, setMembers] = useState([
     {
       id: 1,
       name: "Flora Winters",
@@ -17,14 +16,20 @@ function App() {
   ]);
 
   const addNewMember = member => {
-    const newMember = setMember([...members, member]);
+    const newMember = {
+      id: Date.now(),
+      name: member.name,
+      email: member.email,
+      role: member.role
+    };
+    setMembers([...members, newMember]);
   }
 
   return (
     <div className="App">
       <h1>My Team</h1>
       <Form addNewMember={addNewMember} />
-      <TeamList members={member} />
+      <TeamList members={members} />
     </div>
   );
 }
